@@ -1,13 +1,23 @@
-html,
-body {
-  overflow-x: hidden;
+/*
+ * Only the root element scrolls. If body were also a scroll container, the base
+ * stylesheet's `overscroll-behavior: none` would stop wheel/touchpad scrolling
+ * from chaining out of body to the page (only the scrollbar would work).
+ */
+html {
   overflow-x: clip;
   overflow-y: auto;
   height: auto;
   min-height: 100%;
+}
+body {
+  overflow: visible;
+  overflow-x: clip;
+  height: auto;
+  min-height: 100%;
+  overscroll-behavior: auto;
   user-select: text;
 }
-body.locked {
+html.locked {
   overflow: hidden;
 }
 

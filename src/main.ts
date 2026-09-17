@@ -130,14 +130,14 @@ function unopenedPages(): PageInfo[] {
 async function begin(withRitual = !state.opened.includes(today)): Promise<void> {
   stage.clear();
   heroSlot.classList.remove('shown');
-  document.body.classList.toggle('locked', withRitual && !skipRitual);
+  document.documentElement.classList.toggle('locked', withRitual && !skipRitual);
   hud.classList.toggle('dim', withRitual);
   let result: 'torn' | 'skipped' = 'torn';
   if (withRitual && !skipRitual) {
     const intro = h('div', { class: 'ritual-intro' }, h('span', { class: 'ja' }, PROFILE.nameJa), h('span', { class: 'en' }, PROFILE.nameEn));
     result = await runRitual(app, unopenedPages(), rngFor(`ritual:${today}:${Date.now()}`), sfx, haptic, intro);
   }
-  document.body.classList.remove('locked');
+  document.documentElement.classList.remove('locked');
   hud.classList.remove('dim');
   if (withRitual && result === 'torn' && !state.opened.includes(today)) {
     state.opened.push(today);
