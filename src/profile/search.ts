@@ -27,22 +27,30 @@ const GOOGLE_URL = `https://www.google.com/search?q=${encodeURIComponent(SEARCH_
  * Google Programmable Search Engine element (the supported way to embed Google results).
  */
 export function searchSection(): HTMLElement {
+  const title = h('h2', { class: 'block-title' }, h('span', { class: 'en' }, 'ON THE WEB'), 'Web上の「髙橋那々世」');
+  const googleLink = h('a', { class: 'btn ghost small', href: GOOGLE_URL, target: '_blank', rel: 'noopener' }, 'Google で検索する ↗');
+
+  if (!SEARCH_ENGINE_ID) {
+    return h(
+      'section',
+      { class: 'block search', id: 'search' },
+      title,
+      h('p', { class: 'block-lead' }, h('code', {}, SEARCH_QUERY), ' の検索結果を Google で見られます。同姓同名の方の情報が含まれる場合があります。'),
+      googleLink,
+    );
+  }
+
   const results = h('div', { id: 'gcse-results', class: 'search-results' });
   const status = h('p', { class: 'search-status' }, '検索中…');
   const section = h(
     'section',
     { class: 'block search', id: 'search' },
-    h('h2', { class: 'block-title' }, h('span', { class: 'en' }, 'ON THE WEB'), 'Web上の「髙橋那々世」'),
+    title,
     h('p', { class: 'block-lead' }, 'このページを開いた瞬間に ', h('code', {}, SEARCH_QUERY), ' で検索した結果です。同姓同名の方の情報が含まれる場合があります。'),
     status,
     results,
-    h('a', { class: 'btn ghost small', href: GOOGLE_URL, target: '_blank', rel: 'noopener' }, 'Google で直接検索する ↗'),
+    googleLink,
   );
-
-  if (!SEARCH_ENGINE_ID) {
-    status.textContent = '（検索エンジンIDが未設定のため、ライブ検索はオフです）';
-    return section;
-  }
 
   const run = () => {
     const g = window.google?.search.cse.element;
