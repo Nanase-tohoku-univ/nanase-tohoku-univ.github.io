@@ -11,6 +11,15 @@ export interface TimelineItem {
   future?: boolean;
 }
 
+export interface Publication {
+  /** Full author list in paper order. The entry equal to PROFILE.nameEn is underlined. */
+  authors: string[];
+  title: string;
+  journal: string;
+  year: string;
+  doi: string;
+}
+
 export interface ContactItem {
   label: string;
   /** Shown after the label, e.g. validity period. Wrap uncertain parts in {{ }}. */
@@ -39,6 +48,24 @@ export const PROFILE = {
   research: [{ from: '2024.04', to: '現在', title: '先端音情報システム研究室' }] as TimelineItem[],
 
   work: [{ from: '2022.09', to: '現在', title: '細田千尋研究室', detail: 'アドミニストレイティブ・アシスタント' }] as TimelineItem[],
+
+  publications: [
+    {
+      authors: [
+        'Chihiro Hosoda',
+        'Kenchi Hosokawa',
+        'Takuto Matsuhashi',
+        'Nanase Takahashi',
+        'Yu Hayashizaki',
+        'Yutaka Matsuzaki',
+        'Ryuta Kawashima',
+      ],
+      title: 'Shifting academic fates in early adolescence are marked by concurrent behavioural change rather than baseline profiles',
+      journal: 'Scientific Reports',
+      year: '2026',
+      doi: '10.1038/s41598-026-72860-w',
+    },
+  ] as Publication[],
 
   contacts: [
     { label: 'Official E-Mail', note: '〜{{2027年3月}}', kind: 'email', email: ['takahashi.nanase.q6', 'dc.tohoku.ac.jp'] },

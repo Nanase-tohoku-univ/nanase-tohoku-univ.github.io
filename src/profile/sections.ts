@@ -1,5 +1,5 @@
 import { h } from '../ui/dom';
-import { PROFILE, type ContactItem, type TimelineItem } from './data';
+import { PROFILE, type ContactItem, type Publication, type TimelineItem } from './data';
 import { searchSection } from './search';
 import { uncertain, withUncertain } from './uncertain';
 
@@ -19,6 +19,26 @@ function timeline(items: TimelineItem[]): HTMLElement {
           it.detail ? h('div', { class: 'tl-detail' }, it.detail) : null,
         ),
       ),
+    ),
+  );
+}
+
+function publication(p: Publication): HTMLElement {
+  const authors = p.authors.flatMap((a, i) => [
+    i > 0 ? ', ' : '',
+    a === PROFILE.nameEn ? h('u', { class: 'pub-me' }, a) : a,
+  ]);
+  return h(
+    'li',
+    { class: 'pub' },
+    h('div', { class: 'pub-authors' }, ...authors),
+    h('div', { class: 'pub-title' }, p.title),
+    h(
+      'div',
+      { class: 'pub-venue' },
+      h('i', {}, p.journal),
+      ` (${p.year}). `,
+      h('a', { href: `https://doi.org/${p.doi}`, target: '_blank', rel: 'noopener' }, `doi:${p.doi}`),
     ),
   );
 }
@@ -64,6 +84,7 @@ export function profileSections(): HTMLElement {
     block('education', 'EDUCATION', '学歴', timeline(PROFILE.education)),
     block('research', 'RESEARCH', '研究室', timeline(PROFILE.research)),
     block('work', 'WORK', '職歴', timeline(PROFILE.work)),
+    block('publications', 'PUBLICATIONS', '業績', h('ol', { class: 'pubs' }, ...PROFILE.publications.map(publication))),
     block('contact', 'CONTACT', '連絡先', h('ul', { class: 'contacts' }, ...PROFILE.contacts.map(contact))),
     searchSection(),
     h(

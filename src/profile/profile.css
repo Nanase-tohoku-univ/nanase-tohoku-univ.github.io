@@ -290,6 +290,44 @@ html.locked {
   line-height: 1.5;
 }
 
+.pubs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pub {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.pub-authors {
+  font-size: 13px;
+  color: var(--muted);
+}
+.pub-me {
+  color: var(--fg);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+.pub-title {
+  margin: 4px 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+.pub-venue {
+  font-size: 13px;
+  color: var(--muted);
+}
+.pub-venue a {
+  color: var(--accent);
+}
+
 .contacts {
   list-style: none;
   margin: 0;
