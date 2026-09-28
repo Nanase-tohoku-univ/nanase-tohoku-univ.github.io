@@ -23,10 +23,12 @@ function timeline(items: TimelineItem[]): HTMLElement {
   );
 }
 
+const MY_NAMES = new Set([PROFILE.nameEn, ...PROFILE.nameJaSearchVariants].map((n) => n.replace(/\s/g, '')));
+
 function publication(p: Publication): HTMLElement {
   const authors = p.authors.flatMap((a, i) => [
-    i > 0 ? ', ' : '',
-    a === PROFILE.nameEn ? h('u', { class: 'pub-me' }, a) : a,
+    i > 0 ? (p.ja ? '，' : ', ') : '',
+    MY_NAMES.has(a.replace(/\s/g, '')) ? h('u', { class: 'pub-me' }, a) : a,
   ]);
   return h(
     'li',
@@ -36,9 +38,10 @@ function publication(p: Publication): HTMLElement {
     h(
       'div',
       { class: 'pub-venue' },
-      h('i', {}, p.journal),
-      ` (${p.year}). `,
-      h('a', { href: `https://doi.org/${p.doi}`, target: '_blank', rel: 'noopener' }, `doi:${p.doi}`),
+      p.ja ? p.venue : h('i', {}, p.venue),
+      p.year ? ` (${p.year}).` : '',
+      p.doi ? ' ' : null,
+      p.doi ? h('a', { href: `https://doi.org/${p.doi}`, target: '_blank', rel: 'noopener' }, `doi:${p.doi}`) : null,
     ),
   );
 }

@@ -12,12 +12,16 @@ export interface TimelineItem {
 }
 
 export interface Publication {
-  /** Full author list in paper order. The entry equal to PROFILE.nameEn is underlined. */
+  /** Full author list in paper order. Own name (English or Japanese, spaces ignored) is underlined. */
   authors: string[];
   title: string;
-  journal: string;
-  year: string;
-  doi: string;
+  /** Journal or conference name. */
+  venue: string;
+  /** Shown as "(year)" after the venue; omit when the venue already includes it. */
+  year?: string;
+  doi?: string;
+  /** Japanese-language entry: authors separated by "，", venue not italicised. */
+  ja?: boolean;
 }
 
 export interface ContactItem {
@@ -61,9 +65,15 @@ export const PROFILE = {
         'Ryuta Kawashima',
       ],
       title: 'Shifting academic fates in early adolescence are marked by concurrent behavioural change rather than baseline profiles',
-      journal: 'Scientific Reports',
+      venue: 'Scientific Reports',
       year: '2026',
       doi: '10.1038/s41598-026-72860-w',
+    },
+    {
+      authors: ['高橋 那々世', '坂本 修一'],
+      title: '身体傾斜の弁別に全身振動と空間参照枠が異なる音像の提示が及ぼす影響',
+      venue: '日本音響学会 2026年秋季研究発表会',
+      ja: true,
     },
   ] as Publication[],
 
