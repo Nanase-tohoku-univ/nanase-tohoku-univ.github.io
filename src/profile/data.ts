@@ -72,7 +72,7 @@ export const PROFILE = {
     {
       authors: ['高橋 那々世', '坂本 修一'],
       title: '身体傾斜の弁別に全身振動と空間参照枠が異なる音像の提示が及ぼす影響',
-      venue: '日本音響学会 2026年秋季研究発表会',
+      venue: '日本音響学会 2026年秋季研究発表会，3-P-6',
       ja: true,
     },
   ] as Publication[],
